@@ -60,6 +60,7 @@
       thisProduct.data = data;
 
       thisProduct.renderInMenu();
+      thisProduct.initAccordion();
 
       console.log('new Product:', thisProduct);
     }
@@ -79,12 +80,53 @@
       /* add element to menu */
       menuContainer.appendChild(thisProduct.element);
     }
+
+    initAccordion() {
+      const thisProduct = this;
+      console.log('jestem thisProduct', thisProduct);
+
+      /* find the clickable trigger (the element that should react to clicking) */
+      const clickElements = document.querySelectorAll(select.menuProduct.clickable);
+      //console.log('jestem pp', pp);
+
+      /* START: click event listener to trigger */
+      for (let element of clickElements) {
+        element.addEventListener('click', function () {
+          console.log('jestem');
+        });
+      }
+
+      /* prevent default action for event */
+
+      /* toggle active class on element of thisProduct */
+
+      /* find all active products */
+
+      /* START LOOP: for each active product */
+
+      /* START: if the active product isn't the element of thisProduct */
+
+      /* remove class active for the active product */
+
+      /* END: if the active product isn't the element of thisProduct */
+
+      /* END LOOP: for each active product */
+
+      /* END: click event listener to trigger */
+    }
+
   }
 
   const app = {
     initMenu: function () {
-      const testProduct = new Product();
-      console.log('testProduct:', testProduct);
+      const thisApp = this;
+      console.log('thisApp.data', thisApp.data);
+
+      for (let productData in thisApp.data.products) {
+        //console.log('productData', productData);
+        //console.log('thisApp.data.products[productData]', thisApp.data.products[productData]);
+        new Product(productData, thisApp.data.products[productData]);
+      }
     },
 
     initData: function () {
@@ -92,13 +134,6 @@
 
       thisApp.data = dataSource;
       console.log('thisApp.data', thisApp.data);
-
-      for (let productData in thisApp.data.products) {
-        //console.log('productData', productData);
-        //console.log('thisApp.data.products[productData]', thisApp.data.products[productData]);
-        new Product(productData, thisApp.data.products[productData]);
-
-      }
     },
 
     init: function () {
