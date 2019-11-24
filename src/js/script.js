@@ -64,8 +64,8 @@
       thisProduct.renderInMenu();
       thisProduct.getElements();
       thisProduct.initAccordion();
-      // thisProduct.initOrderForm();
-      //thisProduct.processOrder();
+      thisProduct.initOrderForm();
+      thisProduct.processOrder();
 
       //console.log('new Product:', thisProduct);
     }
@@ -118,7 +118,7 @@
         if (thisProduct.element.classList.contains('active')) {
           activeProducts.push(thisProduct.element);
         }
-        console.log(activeProducts);
+        // console.log(activeProducts);
 
         /* START LOOP: for each active product */
         for (let product of activeProducts) {
@@ -154,14 +154,41 @@
         thisProduct.processOrder();
       });
 
-      console.log('initOrderForm');
+      // console.log('initOrderForm');
     }
 
     processOrder() {
       const thisProduct = this;
-      console.log(thisProduct);
 
-      console.log('processOrder');
+      const formData = utils.serializeFormToObject(thisProduct.form);
+      //console.log('formData', formData);
+
+      let price = thisProduct.data.price;
+      console.log('price', price);
+
+      //console.log('thisProduct.data.params', thisProduct.data.params);
+      for (let paramId in thisProduct.data.params) {
+        const param = thisProduct.data.params[paramId];
+        //console.log('parmId:', paramId);
+        for (let optionId in param.options) {
+          const option = param.options[optionId];
+          // console.log('optionId:', optionId);
+
+          //checking if element is selected(hope so)(I didn't know how to do that)
+          let selectedOption = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
+          console.log(selectedOption);
+          if (selectedOption == true && !option.default) {
+            price += option.price;
+            // console.log(price);
+          } else if (selectedOption == false && option.default) {
+            price -= option.price;
+            // console.log(price);
+          }
+
+
+        }
+      }
+      thisProduct.priceElem.innerHTML = price;
     }
 
 
@@ -180,16 +207,16 @@
       const thisApp = this;
 
       thisApp.data = dataSource;
-      console.log('thisApp.data', thisApp.data);
+      // console.log('thisApp.data', thisApp.data);
     },
 
     init: function () {
       const thisApp = this;
-      console.log('*** App starting ***');
-      console.log('thisApp:', thisApp);
-      console.log('classNames:', classNames);
-      console.log('settings:', settings);
-      console.log('templates:', templates);
+      // console.log('*** App starting ***');
+      // console.log('thisApp:', thisApp);
+      // console.log('classNames:', classNames);
+      // console.log('settings:', settings);
+      // console.log('templates:', templates);
       thisApp.initData();
       thisApp.initMenu();
     },
