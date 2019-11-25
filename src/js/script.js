@@ -33,12 +33,12 @@
     },
   };
 
-  // const classNames = {
-  //   menuProduct: {
-  //     wrapperActive: 'active',
-  //     imageVisible: 'active',
-  //   },
-  // };
+  const classNames = {
+    menuProduct: {
+      wrapperActive: 'active',
+      imageVisible: 'active',
+    },
+  };
 
   // const settings = {
   //   amountWidget: {
@@ -94,6 +94,7 @@
       thisProduct.formInputs = thisProduct.form.querySelectorAll(select.all.formInputs);
       thisProduct.cartButton = thisProduct.element.querySelector(select.menuProduct.cartButton);
       thisProduct.priceElem = thisProduct.element.querySelector(select.menuProduct.priceElem);
+      thisProduct.imageWrapper = thisProduct.element.querySelector(select.menuProduct.imageWrapper);
     }
 
     initAccordion() {
@@ -164,7 +165,9 @@
       //console.log('formData', formData);
 
       let price = thisProduct.data.price;
-      console.log('price', price);
+      // console.log('price', price);
+
+
 
       //console.log('thisProduct.data.params', thisProduct.data.params);
       for (let paramId in thisProduct.data.params) {
@@ -176,13 +179,26 @@
 
           //checking if element is selected(hope so)(I didn't know how to do that)
           let selectedOption = formData.hasOwnProperty(paramId) && formData[paramId].indexOf(optionId) > -1;
-          console.log(selectedOption);
+          //console.log(selectedOption);
           if (selectedOption == true && !option.default) {
             price += option.price;
             // console.log(price);
           } else if (selectedOption == false && option.default) {
             price -= option.price;
             // console.log(price);
+          }
+
+          const images = thisProduct.imageWrapper.querySelectorAll('.' + paramId + '-' + optionId);
+          //console.log(images);
+
+          if (selectedOption) {
+            for (let image of images) {
+              image.classList.add(classNames.menuProduct.imageVisible);
+            }
+          } else {
+            for (let image of images) {
+              image.classList.remove(classNames.menuProduct.imageVisible);
+            }
           }
 
 
