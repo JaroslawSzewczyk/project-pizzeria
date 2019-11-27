@@ -181,6 +181,7 @@
       thisProduct.cartButton.addEventListener('click', function (event) {
         event.preventDefault();
         thisProduct.processOrder();
+        thisProduct.addToCart();
       });
 
       // console.log('initOrderForm');
@@ -191,6 +192,8 @@
 
       const formData = utils.serializeFormToObject(thisProduct.form);
       //console.log('formData', formData);
+
+      thisProduct.params = {};
 
       let price = thisProduct.data.price;
       // console.log('price', price);
@@ -220,6 +223,14 @@
           //console.log(images);
 
           if (selectedOption) {
+            if (!thisProduct.params[paramId]) {
+              thisProduct.params[paramId] = {
+                label: param.label,
+                options: {},
+              };
+            }
+            thisProduct.params[paramId].options[optionId] = option.label;
+
             for (let image of images) {
               image.classList.add(classNames.menuProduct.imageVisible);
             }
@@ -228,13 +239,14 @@
               image.classList.remove(classNames.menuProduct.imageVisible);
             }
           }
-
-
         }
       }
 
-      price *= thisProduct.amountWidget.value;
-      thisProduct.priceElem.innerHTML = price;
+      thisProduct.priceSingle = price;
+      thisProduct.price = thisProduct.priceSingle * thisProduct.amountWidget.value;
+      thisProduct.priceElem.innerHTML = thisProduct.price;
+
+      console.log('thisProduct.params', thisProduct.params);
     }
 
     initAmountWidget() {
@@ -246,6 +258,15 @@
       });
 
       //console.log('thisProduct.amountWidget', thisProduct.amountWidget);
+    }
+
+    addToCart() {
+      const thisProduct = this;
+
+      thisProduct.name = thisProduct.data.name;
+      thisProduct.amount = thisProduct.AmountWidget.value;
+
+      app.cart.add(thisProduct);
     }
 
   }
@@ -354,6 +375,13 @@
         thisCart.dom.wrapper.classList.toggle(classNames.cart.wrapperActive);
       });
     }
+
+    add(menuProduct) {
+      // const thisCart = this;
+
+      console.log('adding product', menuProduct);
+    }
+
   }
 
   const app = {
