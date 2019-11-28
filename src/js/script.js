@@ -6,6 +6,7 @@
   const select = {
     templateOf: {
       menuProduct: '#template-menu-product',
+      cartProduct: '#template-cart-product',
     },
     containerOf: {
       menu: '#product-list',
@@ -26,7 +27,7 @@
     },
     widgets: {
       amount: {
-        input: 'input[class="amount"]',
+        input: 'input.amount',
         linkDecrease: 'a[href="#less"]',
         linkIncrease: 'a[href="#more"]',
       },
@@ -74,7 +75,7 @@
 
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
-    //cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML),
+    cartProduct: Handlebars.compile(document.querySelector(select.templateOf.cartProduct).innerHTML)
   };
 
   const activeProducts = [];
@@ -231,6 +232,7 @@
             }
             thisProduct.params[paramId].options[optionId] = option.label;
 
+
             for (let image of images) {
               image.classList.add(classNames.menuProduct.imageVisible);
             }
@@ -264,8 +266,9 @@
       const thisProduct = this;
 
       thisProduct.name = thisProduct.data.name;
-      thisProduct.amount = thisProduct.AmountWidget.value;
-
+      console.log('name', thisProduct.name);
+      thisProduct.amount = thisProduct.amountWidget.value;
+      console.log('amount', thisProduct.amount);
       app.cart.add(thisProduct);
     }
 
@@ -365,7 +368,9 @@
       console.log(thisCart.dom.wrapper);
 
       thisCart.dom.toggleTrigger = thisCart.dom.wrapper.querySelector(select.cart.toggleTrigger);
-      console.log('thisCart.dom.toggleTrigger', thisCart.dom.toggleTrigger);
+      thisCart.dom.productList = thisCart.dom.wrapper.querySelector(select.cart.productList);
+      console.log('thisCart.dom.productList', thisCart.dom.productList);
+      console.log('dom', thisCart.dom);
     }
 
     initActions() {
@@ -377,7 +382,14 @@
     }
 
     add(menuProduct) {
-      // const thisCart = this;
+      const thisCart = this;
+
+      const generatedHTML = templates.cartProduct(menuProduct);
+
+      const generateDom = utils.createDOMFromHTML(generatedHTML);
+
+      thisCart.dom.productList.appendChild(generateDom);
+
 
       console.log('adding product', menuProduct);
     }
@@ -405,6 +417,7 @@
 
       const cartElem = document.querySelector(select.containerOf.cart);
       thisApp.cart = new Cart(cartElem);
+      console.log('tApp', thisApp.cart);
     },
 
     init: function () {
