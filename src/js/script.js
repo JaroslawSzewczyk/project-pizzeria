@@ -281,8 +281,10 @@
       thisWidget.getElements(element);
 
       thisWidget.value = settings.amountWidget.defaultValue;
+      console.log('this.val', thisWidget.input.value);
 
       thisWidget.setValue(thisWidget.input.value);
+      console.log('thisWidget.setValue(thisWidget.input.value)', thisWidget.input.value);
       thisWidget.initActions();
 
       // console.log('AmountWidget:', thisWidget);
@@ -424,7 +426,7 @@
 
       thisCartProduct.dom.wrapper = element;
 
-      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.AmountWidget);
+      thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
       console.log('thisCartProduct.amountWidget', thisCartProduct.amountWidget);
       thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
       thisCartProduct.dom.edit = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.edit);
@@ -435,9 +437,9 @@
       const thisCartProduct = this;
 
       thisCartProduct.amountWidget = new AmountWidget(thisCartProduct.dom.amountWidget);
-      console.log('thisCartProduct.amountWidget', thisCartProduct.amountWidget);
+      //console.log('thisCartProduct.amountWidget', thisCartProduct.amountWidget);
 
-      thisCartProduct.dom.amountWidget.addEventListener('update', function () {
+      thisCartProduct.dom.amountWidget.addEventListener('click', function () {
         thisCartProduct.amount = thisCartProduct.amountWidget.value;
         thisCartProduct.price = thisCartProduct.priceSingle * thisCartProduct.amount;
         thisCartProduct.dom.price.innerHTML = thisCartProduct.price;
