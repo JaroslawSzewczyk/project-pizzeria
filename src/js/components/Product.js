@@ -33,7 +33,7 @@ class Product {
     /* generate HTML based on tamplate */
     const generatedHTML = templates.menuProduct(thisProduct.data);
 
-    /* create elemenr using utils.createElementFromHTML */
+    /* create element using utils.createElementFromHTML */
     thisProduct.element = utils.createDOMFromHTML(generatedHTML);
 
     /* find menu container */

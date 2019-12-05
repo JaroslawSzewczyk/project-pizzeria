@@ -1,12 +1,12 @@
 import {
   settings,
   select,
-  classNames,
-  templates
+  classNames
 } from './settings.js';
 
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
+import Booking from './components/Booking.js';
 
 const app = {
   initPages: function () {
@@ -60,6 +60,17 @@ const app = {
     }
   },
 
+  initBooking() {
+    const thisApp = this;
+
+    /* find booking-wrapper container */
+    thisApp.widgetOrderSite = document.querySelector(select.containerOf.booking);
+    console.log('thisApp.widgetOrderSite',thisApp.widgetOrderSite);
+
+    /* creating new instance of Booking class*/
+    thisApp.bookingObj = new Booking(thisApp.widgetOrderSite);
+  },
+
   initMenu: function () {
     const thisApp = this;
 
@@ -79,13 +90,13 @@ const app = {
         return rawResponse.json();
       })
       .then(function (parsedResponse) {
-        console.log('parsedResponse', parsedResponse);
+        //console.log('parsedResponse', parsedResponse);
         /* save parsedResponse as thisApp.data.products */
         thisApp.data.products = parsedResponse;
         /* execute initMenu method */
         thisApp.initMenu();
       });
-    console.log('thisApp.data', thisApp.data);
+    //console.log('thisApp.data', thisApp.data);
   },
 
   initCart: function () {
@@ -103,15 +114,16 @@ const app = {
 
   init: function () {
     const thisApp = this;
-    console.log('*** App starting ***');
-    console.log('thisApp:', thisApp);
-    console.log('classNames:', classNames);
-    console.log('settings:', settings);
-    console.log('templates:', templates);
-    console.log('*** App ending ***');
+    // console.log('*** App starting ***');
+    // console.log('thisApp:', thisApp);
+    // console.log('classNames:', classNames);
+    // console.log('settings:', settings);
+    // console.log('templates:', templates);
+    // console.log('*** App ending ***');
     thisApp.initPages();
     thisApp.initData();
     thisApp.initCart();
+    thisApp.initBooking();
   },
 };
 
