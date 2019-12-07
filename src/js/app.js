@@ -28,7 +28,7 @@ const app = {
       }
     }
 
-    thisApp.activatePage(pageMatchingHash );
+    thisApp.activatePage(pageMatchingHash);
 
     for (let link of thisApp.navLinks) {
       link.addEventListener('click', function (event) {
@@ -65,7 +65,7 @@ const app = {
 
     /* find booking-wrapper container */
     thisApp.widgetOrderSite = document.querySelector(select.containerOf.booking);
-    console.log('thisApp.widgetOrderSite',thisApp.widgetOrderSite);
+    //console.log('thisApp.widgetOrderSite',thisApp.widgetOrderSite);
 
     /* creating new instance of Booking class*/
     thisApp.bookingObj = new Booking(thisApp.widgetOrderSite);
