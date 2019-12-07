@@ -1,11 +1,10 @@
-import BaseWidget from './BaseWidget';
-import utils from '../utils';
+import BaseWidget from './BaseWidget.js';
+import utils from '../utils.js';
 
 import {
   select,
   settings
-} from '../settings';
-
+} from '../settings.js';
 
 class DatePicker extends BaseWidget {
   constructor(wrapper) {
@@ -14,6 +13,7 @@ class DatePicker extends BaseWidget {
     const thisWidget = this;
 
     thisWidget.dom.input = wrapper.querySelector(select.widgets.datePicker.input);
+    console.log('thisWidget.dom.input', thisWidget.dom.input);
 
     thisWidget.initPlugin();
 
@@ -22,9 +22,11 @@ class DatePicker extends BaseWidget {
   initPlugin() {
     const thisWidget = this;
 
-    thisWidget.minDate = new Date(thisWidget.value);
-    thisWidget.maxDate = utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture);
+    /* creating min and max property and converting them to string  */
+    thisWidget.minDate = utils.dateToStr(new Date(thisWidget.value));
+    thisWidget.maxDate = utils.dateToStr(utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture));
 
+    // eslint-disable-next-line no-undef
     flatpickr(thisWidget.dom.input, {
       defaultDate: thisWidget.minDate,
       minDate: thisWidget.minDate,
@@ -32,17 +34,17 @@ class DatePicker extends BaseWidget {
       'disable': [
         function (date) {
           // return true to disable
-          return (date.getDay() === 0 || date.getDay() === 6);
-
+          return (date.getDay() === 1);
         }
       ],
       'locale': {
         'firstDayOfWeek': 1 // start week on Monday
       },
-      onChange: function (selectDates, dateStr) {
+      onChange: function (dateStr) {
         thisWidget.value = dateStr;
       },
     });
+    console.log('thisWidget.value', typeof (thisWidget.value));
   }
 
   parseValue(value) {
@@ -53,9 +55,7 @@ class DatePicker extends BaseWidget {
     return true;
   }
 
-  renderValue() {
-    console.log('DatePicker');
-  }
+  renderValue() {}
 
 }
 
