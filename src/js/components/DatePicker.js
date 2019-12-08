@@ -33,7 +33,7 @@ class DatePicker extends BaseWidget {
       'disable': [
         function (date) {
           // return true to disable
-          return (date.getDay() === 1);
+          return (date.getDay() === 1); // changing day when restaurant is close
         }
       ],
       'locale': {
