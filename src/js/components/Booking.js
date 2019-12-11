@@ -1,6 +1,7 @@
 import {
   templates,
-  select
+  select,
+  settings,
 } from '../settings.js';
 import utils from '../utils.js';
 import AmountWidget from './AmountWidget.js';
@@ -13,6 +14,62 @@ class Booking {
 
     thisBooking.render(widgetOrderSite);
     thisBooking.initWidgets();
+    thisBooking.getData();
+  }
+
+  getData() {
+    const thisBooking = this;
+
+    const startDateParam = settings.db.dateStartParamKey + '=' + thisBooking.datePicker.minDate;
+    const endDateParam = settings.db.dateEndParamKey + '=' + thisBooking.datePicker.maxDate;
+
+    const params = {
+      booking: [
+        startDateParam,
+        endDateParam,
+      ],
+      eventsCurrent: [
+        settings.db.notRepeatParam,
+        startDateParam,
+        endDateParam,
+      ],
+      eventsRepeat: [
+        settings.db.repeatParam,
+        endDateParam,
+      ],
+    };
+
+    const urls = {
+      booking: settings.db.url + '/' + settings.db.booking
+                               + '?' + params.booking.join('&'),
+      eventsCurrent: settings.db.url + '/' + settings.db.event
+                               + '?' + params.eventsCurrent.join('&'),
+      eventsRepeat: settings.db.url + '/' + settings.db.event
+                               + '?' + params.eventsRepeat.join('&'),
+    };
+
+    console.log('urls', urls);
+
+    Promise.all([
+      fetch(urls.booking),
+      fetch(urls.eventsCurrent),
+      fetch(urls.eventsRepeat),
+    ])
+      .then(function (allResponses) {
+        const bookingsResponse = allResponses[0];
+        const eventCurrentResponse = allResponses[1];
+        const eventRepeatResponse = allResponses[2];
+        return Promise.all([
+          bookingsResponse.json(),
+          eventCurrentResponse.json(),
+          eventRepeatResponse .json()
+        ]);
+      })
+      .then(function ([bookings, eventsCurrent, eventsRepeat]) {
+        console.log(bookings);
+        console.log(eventsCurrent);
+        console.log(eventsRepeat);
+      });
   }
 
   render(widgetOrderSite) {
