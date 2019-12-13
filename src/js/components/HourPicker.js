@@ -12,7 +12,7 @@ class HourPicker extends BaseWidget {
     const thisWidget = this;
 
     thisWidget.dom.input = wrapper.querySelector(select.widgets.hourPicker.input);
-    console.log(' thisWidget.dom.input', thisWidget.dom.input);
+    //console.log(' thisWidget.dom.input', thisWidget.dom.input);
     thisWidget.dom.output = wrapper.querySelector(select.widgets.hourPicker.output);
 
     thisWidget.initPlugin();
