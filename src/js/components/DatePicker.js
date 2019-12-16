@@ -24,7 +24,6 @@ class DatePicker extends BaseWidget {
     /* creating min and max property and converting them to string  */
     thisWidget.minDate = new Date(thisWidget.value);
     thisWidget.maxDate = utils.addDays(thisWidget.minDate, settings.datePicker.maxDaysInFuture);
-    console.log('datePicker.value', thisWidget.value);
 
     // eslint-disable-next-line no-undef
     flatpickr(thisWidget.dom.input, {
@@ -34,7 +33,7 @@ class DatePicker extends BaseWidget {
       'disable': [
         function (date) {
           // return true to disable
-          return (date.getDay() === 1); // changing day when restaurant is close
+          return (date.getDay() === 3); // changing day when restaurant is close
         }
       ],
       'locale': {
