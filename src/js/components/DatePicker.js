@@ -46,8 +46,9 @@ class DatePicker extends BaseWidget {
   }
 
   parseValue(value) {
-    return value;
+    return utils.dateToStr(value[0]);
   }
+
 
   isValid() {
     return true;
