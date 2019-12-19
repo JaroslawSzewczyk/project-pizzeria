@@ -26,6 +26,18 @@ body {
   margin: auto;
 }
 
+.imgContainer {
+  width: 30%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 5px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .containerSite {
   position: relative;
   width: 49%;

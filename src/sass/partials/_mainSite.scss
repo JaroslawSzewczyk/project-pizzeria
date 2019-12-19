@@ -28,18 +28,6 @@
 .review{
   margin-top: 100px;
 
-  .reviewImg {
-    width: 30%;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 5px;
-
-    img {
-      width: 100%;
-      height: 100%;
-    }
-  }
-
   .textReview {
     width: 68%;
     height: 200px;
@@ -58,9 +46,70 @@
       width: 15px;
       height: 15px;
       border-radius: 50%;
-      border: 1px solid black;
+      background-color: #ddd;
       margin-left: 10px;
     }
   }
 }
 
+.gallery{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 100px;
+
+  .imgContainer{
+    position: relative;
+    width: 30%;
+    margin-top: 10px;
+    cursor: pointer;
+
+    .cover {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      opacity: 0;
+      transition: all .2s linear;
+    }
+
+    .icons{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      i{
+        font-size: 25px;
+        color: #fff;
+        margin-left: 10px;
+        opacity: 0;
+        transition: all .2s linear;
+
+        &:hover {
+          color: red;
+          z-index: 5;
+        }
+      }
+    }
+
+    &:hover i{
+      opacity: 1;
+    }
+
+    &:hover .cover{
+      opacity: .3;
+    }
+  }
+}
+
+.moreOnInstagram{
+  margin: 40px 10px;
+  height: 100px;
+
+  a {
+    color: red;
+  }
+}
