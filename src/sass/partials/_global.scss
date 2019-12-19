@@ -18,15 +18,22 @@ body {
   padding: 0 20px;
 }
 
+.siteWrapper{
+  display: flex;
+  flex-wrap: wrap;
+  width: 95%;
+  justify-content: space-between;
+  margin: auto;
+}
 
-.hWrapper {
+.containerSite {
   position: relative;
   width: 49%;
   height: 120px;
-  margin-top: 25px;
   border-radius: 5px;
   background-position: center;
   text-align: center;
+  margin-top: 25px;
 
   a {
     position: absolute;
