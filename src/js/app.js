@@ -7,15 +7,16 @@ import {
 import Product from './components/Product.js';
 import Cart from './components/Cart.js';
 import Booking from './components/Booking.js';
+import Carousel from './components/Carousel.js';
 
 const app = {
   initPages: function () {
     const thisApp = this;
 
     thisApp.pages = document.querySelector(select.containerOf.pages).children;
-    console.log('thisApp.pages', thisApp.pages);
+    //console.log('thisApp.pages', thisApp.pages);
     thisApp.navLinks = document.querySelectorAll(select.nav.links);
-    console.log('thisApp.navLinks', thisApp.navLinks);
+    //console.log('thisApp.navLinks', thisApp.navLinks);
 
     const idFromHash = window.location.hash.replace('#/', '');
 
@@ -112,6 +113,10 @@ const app = {
     });
   },
 
+  initCarousel: function () {
+    new Carousel();
+  },
+
   init: function () {
     const thisApp = this;
     // console.log('*** App starting ***');
@@ -124,6 +129,7 @@ const app = {
     thisApp.initData();
     thisApp.initCart();
     thisApp.initBooking();
+    thisApp.initCarousel();
   },
 };
 

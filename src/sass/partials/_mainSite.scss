@@ -29,16 +29,30 @@
   margin-top: 100px;
 
   .textReview {
+    position: relative;
     width: 68%;
     height: 200px;
-    padding: 20px 50px;
-    text-align: left;
+
+    .reviews{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: .5s linear;
+    }
+
+    .activeText{
+      opacity: 1;
+    }
   }
 
   .reviewMark{
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
     width: 100%;
     height: 40px;
 
@@ -48,6 +62,10 @@
       border-radius: 50%;
       background-color: #ddd;
       margin-left: 10px;
+    }
+
+    .activeMark{
+      background-color: #000;
     }
   }
 }

@@ -226,7 +226,7 @@ class Booking {
 
     /*find starters container */
     thisBooking.dom.checkboxes = thisBooking.dom.wrapper.querySelectorAll(select.booking.starters);
-    console.log('thisBooking.dom.checkboxes',thisBooking.dom.checkboxes);
+    //console.log('thisBooking.dom.checkboxes',thisBooking.dom.checkboxes);
   }
 
   initWidgets() {

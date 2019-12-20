@@ -25,6 +25,10 @@ export const select = {
     amountWidget: '.widget-amount',
     cartButton: '[href="#add-to-cart"]',
   },
+  carousel: {
+    textReview: '.reviews',
+    reviewMark: '.reviewMark div',
+  },
   widgets: {
     amount: {
       input: 'input.amount',
@@ -88,6 +92,10 @@ export const classNames = {
   pages: {
     active: 'active',
   },
+  activeCarousel: {
+    activeText: 'activeText',
+    activeMark: 'activeMark',
+  }
 };
 
 export const settings = {
@@ -120,6 +128,9 @@ export const settings = {
     notRepeatParam: 'repeat=false',
     repeatParam: 'repeat_ne=false',
   },
+  intervalTime: {
+    time: 1500,
+  }
 };
 
 export const templates = {
