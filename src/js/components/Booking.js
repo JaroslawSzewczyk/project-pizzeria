@@ -112,6 +112,8 @@ class Booking {
     // console.log(eventsRepeat)
 
     thisBooking.updateDom();
+
+    console.log('thisBooking.booked', thisBooking.booked);
   }
 
   makeBooked(date, hour, duration, table) {
@@ -129,7 +131,6 @@ class Booking {
       }
       thisBooking.booked[date][hourBlock].push(table);
     }
-
   }
 
   updateDom() {
@@ -167,6 +168,8 @@ class Booking {
         table.classList.remove(classNames.booking.tableBooked);
       }
     }
+
+    thisBooking.setBgc();
     //console.log('thisBooking.booked[thisBooking.date][thisBooking.hour]', thisBooking.booked[thisBooking.date][thisBooking.hour]);
   }
 
@@ -318,6 +321,60 @@ class Booking {
     });
   }
 
+  setBgc() {
+    const thisBooking = this;
+
+    //find rangerSlider
+    thisBooking.dom.form.bgc = thisBooking.dom.form.querySelector(select.widgets.hourPicker.rangeSlider);
+
+    const open = settings.hours.open;
+    const close = settings.hours.close;
+    const hours = [];
+    const tableAmount = [];
+    const colours = [];
+    const linearStyle = [];
+
+    for (let i = open; i < close; i += 0.5){
+      hours.push(i);
+    }
+
+    for (let hour of hours) {
+      if (!thisBooking.booked[thisBooking.date][hour]) {
+        tableAmount.push(0);
+      } else {
+        tableAmount.push(thisBooking.booked[thisBooking.date][hour].length);
+      }
+    }
+
+    for (let table of tableAmount) {
+      if (table === 3) {
+        colours.push(settings.colours.red);
+      } else if (table === 2) {
+        colours.push(settings.colours.orange);
+      } else {
+        colours.push(settings.colours.green);
+      }
+    }
+
+    let avg = Math.round(100 / colours.length);
+    let auxiliary = Math.round(100 / colours.length);
+    let begin = 0;
+
+    for (let colour of colours) {
+      linearStyle.push(colour + ' ' + begin + '%' + ' ' + avg + '%');
+      begin += auxiliary;
+      avg += auxiliary;
+    }
+
+    const colorStyle = linearStyle.join(', ');
+
+    thisBooking.dom.form.bgc.style.background = 'linear-gradient(to right,' + colorStyle + ')';
+
+    console.log('colorStyle', colorStyle);
+    // console.log('colours', colours);
+    // console.log('hours', hours);
+    // console.log('tableAmount', tableAmount);
+  }
 }
 
 export default Booking;

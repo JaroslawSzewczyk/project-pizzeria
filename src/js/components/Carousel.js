@@ -39,7 +39,6 @@ class Carousel {
 
     thisCarousel.reviews[thisCarousel.active].classList.add(classNames.activeCarousel.activeText);
     thisCarousel.marks[thisCarousel.active].classList.add(classNames.activeCarousel.activeMark);
-    console.log('marks');
   }
 
   interval(time) {

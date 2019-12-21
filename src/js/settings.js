@@ -43,6 +43,7 @@ export const select = {
       wrapper: '.hour-picker',
       input: 'input[type="range"]',
       output: '.output',
+      rangeSlider: '.rangeSlider',
     },
   },
   cart: {
@@ -129,8 +130,13 @@ export const settings = {
     repeatParam: 'repeat_ne=false',
   },
   intervalTime: {
-    time: 1500,
-  }
+    time: 3000,
+  },
+  colours: {
+    red: 'red',
+    orange: 'orange',
+    green: 'green',
+  },
 };
 
 export const templates = {
