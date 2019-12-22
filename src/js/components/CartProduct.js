@@ -2,7 +2,7 @@ import {
   select
 } from '../settings.js';
 
-import AmountWidget from './amountWidget.js';
+import AmountWidget from './AmountWidget.js';
 
 class CartProduct {
   constructor(menuProduct, element) {
@@ -29,7 +29,7 @@ class CartProduct {
     thisCartProduct.dom = {};
 
     thisCartProduct.dom.wrapper = element;
-    console.log('thisCartProduct.dom.wrapper',thisCartProduct.dom.wrapper);
+    console.log('thisCartProduct.dom.wrapper', thisCartProduct.dom.wrapper);
 
     thisCartProduct.dom.amountWidget = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.amountWidget);
     thisCartProduct.dom.price = thisCartProduct.dom.wrapper.querySelector(select.cartProduct.price);
